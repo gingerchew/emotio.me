@@ -4,21 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotio.me</title>
-    <link rel="stylesheet" href="./src/main.css">
+    <title>🤷 | Emotio.me</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="./src/main.css" />
 </head>
 <body>
+    <header>
+        <h1>Emotio.me</h1>
+    </header>
     <main>
         <div class="splide">
+            <div class="splide__arrows">
+                <button class="splide__arrow splide__arrow--prev">
+                    <span class="visually-hidden">Prev</span>
+                    <span aria-hidden="true" data-prev-date data-date></span>
+                </button>
+                <button class="splide__arrow splide__arrow--next">
+                    <span class="visually-hidden">Next</span>
+                    <span aria-hidden="true" data-next-date data-date></span>
+                </button>
+            </div>
             <div class="splide__track">
-                <ul class="splide__slides">
-                    <li class="splide__slide"><h2>Tired</h2></li>
-                    <li class="splide__slide"><h2>Happy</h2></li>
-                    <li class="splide__slide"><h2>Sad</h2></li>
-                </ul>
+                <ul class="splide__list"></ul>
+            </div>
+        </div>
+        <div v-scope="Emojis()" class="emoji-grid" style="opacity: 0;" @vue:mounted="$el.style.opacity = 1">
+            <div class="row align-center" v-if="activeControl == 1" id="emojiRow">
+                <div class="title">
+                    <h2>What does that look like?</h2>
+                </div>
+                <div v-for="emoji in emojis[emotion.key]">
+                    <button class="emoji-control emoji-{{emotion.key}}" @click="emotion.icon = emoji.icon;activeControl = 2">
+                        <span class="visually-hidden">{{ emoji.title }}</span>
+                        <span class="emoji">{{ emoji.icon }}</span>
+                    </button>
+                </div>
+                <div>
+                    <button @click="emotion = null;" type="button">
+                        Back
+                    </button>
+                </div>
+            </div>
+            <div class="row" id="emotionRow" v-if="activeControl == 0">
+                <div class="title"><h2>How are you feeling today?</h2></div>
+                <div v-for="key in Object.keys(emojis)">
+                    <button type="button" @click="emotion = { key };activeControl = 1;">{{ key }}</button>
+                </div>    
+            </div>
+            <div class="controls" v-if="activeControl == 2">
+                <span aria-hidden="true">{{ emotion.icon }}</span>
+                <span>{{ emotion.key }}</span>
+                <button type="button" @click="addEntry" id="addNewEntry">
+                    Add Entry
+                </button>
+            </div>
+            <div id="alreadyLogged" class="logged-message" v-if="alreadyLogged">
+                <p>You've already logged something for today.</p>
+                <p><small>Come back in {{ hours }} hours and {{ minutes }} minutes</small></p>
             </div>
         </div>
     </main>
+    <footer v-scope="Footer()">
+        <ul role="list">
+            <li>
+                <button @click="open"><span class="visually-hidden">What is this</span>?</button>
+            </li>
+        </ul>
+        <dialog id="about" @click="close">
+            <div class="dialog-body">
+                <h3 class="h4">Emotio.me <small>(pronounced eMO-shi-oh-me)</small> is a simple mood tracker, with a 1 day at a time perspective.</h3>
+                <p>Developed by <a href="gingerchew.link">me (ginger)</a> with love. <a href="https://github.com/gingerchew/emotio.me">repo</a></p>
+            </div>
+        </dialog>
+    </footer>
     <script type="module" src="./src/index.js"></script>
 </body>
 </html>
