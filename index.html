@@ -33,6 +33,12 @@
             </div>
         </div>
         <div v-scope="Emojis()" class="emoji-grid" style="opacity: 0;" @vue:mounted="$el.style.opacity = 1">
+            <div class="row" id="emotionRow" v-if="activeControl == 0" @vue:mounted="emotion = null">
+                <div class="title"><h2>How are you feeling today?</h2></div>
+                <div v-for="key in Object.keys(emojis)">
+                    <button type="button" @click="emotion = { key };activeControl = 1;">{{ key }}</button>
+                </div>
+            </div>
             <div class="row align-center" v-if="activeControl == 1" id="emojiRow">
                 <div class="title">
                     <h2>What does that look like?</h2>
@@ -44,16 +50,10 @@
                     </button>
                 </div>
                 <div>
-                    <button @click="emotion = null;" type="button">
+                    <button @click="activeControl = 0;" type="button">
                         Back
                     </button>
                 </div>
-            </div>
-            <div class="row" id="emotionRow" v-if="activeControl == 0">
-                <div class="title"><h2>How are you feeling today?</h2></div>
-                <div v-for="key in Object.keys(emojis)">
-                    <button type="button" @click="emotion = { key };activeControl = 1;">{{ key }}</button>
-                </div>    
             </div>
             <div class="controls" v-if="activeControl == 2">
                 <span aria-hidden="true">{{ emotion.icon }}</span>
@@ -64,7 +64,7 @@
             </div>
             <div id="alreadyLogged" class="logged-message" v-if="alreadyLogged">
                 <p>You've already logged something for today.</p>
-                <p><small>Come back in {{ hours }} hours and {{ minutes }} minutes</small></p>
+                <p><small>Come back in {{ hours }} and {{ minutes }} </small></p>
             </div>
         </div>
     </main>
