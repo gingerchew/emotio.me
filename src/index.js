@@ -2,7 +2,7 @@ import Splide from "@splidejs/splide";
 import Card from './components/card.js'
 import EmojiStorage from './components/emoji-storage.js'
 // import EmojiPicker from './components/emoji-picker.js'
-import { emojis } from './components/emoji-picker.js';
+import { emojis } from './components/emojis.js';
 import { createApp } from "petite-vue";
 
 const fmt = new Intl.DateTimeFormat('en-US', {
