@@ -2,10 +2,12 @@ lockfileVersion: 5.4
 
 specifiers:
   '@splidejs/splide': ^4.1.4
+  petite-vue: ^0.4.1
   vite: ^4.0.4
 
 dependencies:
   '@splidejs/splide': 4.1.4
+  petite-vue: 0.4.1
 
 devDependencies:
   vite: 4.0.4
@@ -278,6 +280,10 @@ packages:
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
     dev: true
+
+  /petite-vue/0.4.1:
+    resolution: {integrity: sha512-/gtYKQe9r1OV4IEwn2RsPXAHgFTe1nVq4QhldAP6/l8DSe9I754K6Oe1+Ff6dbnT5P8X2XP7PTUZkGRz5uFnFQ==}
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
